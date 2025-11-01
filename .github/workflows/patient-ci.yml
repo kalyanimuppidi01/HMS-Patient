@@ -56,4 +56,5 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Output image
-        run: echo "Image published: ${{ env.IMAGE_NAME }}:${{ github.sha }} and ${{ env.IMAGE_NAME }}:latest"
+        run:
+          echo "Image published: ${{ env.IMAGE_NAME }}:${{ github.sha }} and ${{ env.IMAGE_NAME }}:latest"
