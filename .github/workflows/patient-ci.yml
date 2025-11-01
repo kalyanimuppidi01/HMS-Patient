@@ -1,21 +1,22 @@
 name: CI & Publish to GHCR
 
+# Allow the job to push packages to GHCR using the GITHUB_TOKEN
+permissions:
+  contents: read
+  packages: write
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
-# Allow the job to push packages to GHCR using the GITHUB_TOKEN
-permissions:
-  contents: read
-  packages: write
-
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/hms-${{ github.event.repository.name }} # default image name, override if needed
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -57,4 +58,4 @@ jobs:
 
       - name: Output image
         run:
-          echo "Image published: ${{ env.IMAGE_NAME }}:${{ github.sha }} and ${{ env.IMAGE_NAME }}:latest"
+          echo "Image published: ${{env.IMAGE_NAME}}:${{github.sha}} and ${{env.IMAGE_NAME}}:latest"
