@@ -56,6 +56,9 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Set IMAGE_TAGS
+        run: echo "IMAGE_TAGS=${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:latest" >> $GITHUB_ENV
+
       - name: Output image
         run:
-          echo "Image published: ${{env.IMAGE_NAME}}:${{github.sha}} and ${{env.IMAGE_NAME}}:latest"
+          echo "Image published: $IMAGE_TAGS"
